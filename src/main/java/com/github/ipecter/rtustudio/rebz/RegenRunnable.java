@@ -1,6 +1,7 @@
 package com.github.ipecter.rtustudio.rebz;
 
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
+import kr.rtuserver.framework.bukkit.api.utility.compatible.BlockCompat;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.World;
