@@ -21,7 +21,10 @@ public class RegenRunnable implements Runnable {
             ReSchedule schedule = plugin.getTaskMap().get(location);
             if (schedule.getTime() <= 0) {
                 World world = location.getWorld();
-                if (world != null) toRemove.add(location);
+                if (world != null) {
+                    BlockCompat.place(location, schedule.getMaterial());
+                    toRemove.add(location);
+                }
             } else schedule.setTime(schedule.getTime() - 1);
         }
         for (Location location : toRemove) {

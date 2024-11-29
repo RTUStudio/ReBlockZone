@@ -17,7 +17,6 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ReBlockZone extends RSPlugin {
@@ -68,16 +67,17 @@ public class ReBlockZone extends RSPlugin {
     }
 
     public void fixSchedule() {
-        List<JsonObject> objects = getStorage().get("Regen", null);
-        if (!objects.isEmpty()) console("백업을 시도합니다");
-        for (JsonObject object : objects) {
-            String[] loc = object.get("location").getAsString().split(",");
-            String materialStr = object.get("material").getAsString();
-            Location location = new Location(Bukkit.getWorld(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2]), Integer.parseInt(loc[3]));
-            BlockData material = BlockCompat.from(materialStr);
-            if (material == null) material = Material.AIR.createBlockData();
-            location.getWorld().setBlockData(location, material);
-            removeLocation(location);
-        }
+        getStorage().get("Regen", null).thenAccept((result) -> {
+            if (!result.isEmpty()) console("백업을 시도합니다");
+            for (JsonObject object : result) {
+                String[] loc = object.get("location").getAsString().split(",");
+                String materialStr = object.get("material").getAsString();
+                Location location = new Location(Bukkit.getWorld(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2]), Integer.parseInt(loc[3]));
+                BlockData material = BlockCompat.from(materialStr);
+                if (material == null) material = Material.AIR.createBlockData();
+                location.getWorld().setBlockData(location, material);
+                removeLocation(location);
+            }
+        });
     }
 }
