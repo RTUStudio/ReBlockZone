@@ -58,12 +58,12 @@ public class ReBlockZone extends RSPlugin {
         String location = loc.getWorld().getName() + "," + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
         object.addProperty("location", location);
         object.addProperty("material", material);
-        getStorage().add("Regen", object);
+        getStorage().add("Regen", object).join();
     }
 
     public void removeLocation(Location loc) {
         String location = loc.getWorld().getName() + "," + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
-        getStorage().set("Regen", Pair.of("location", location), null);
+        getStorage().set("Regen", Pair.of("location", location), null).join();
     }
 
     public void fixSchedule() {
