@@ -15,13 +15,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 
-public class BlockBreak extends RSListener {
-
-    private final ReBlockZone plugin;
+public class BlockBreak extends RSListener<ReBlockZone> {
 
     public BlockBreak(ReBlockZone plugin) {
         super(plugin);
-        this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -30,17 +27,25 @@ public class BlockBreak extends RSListener {
         Block block = e.getBlock();
         Location location = block.getLocation();
         String regionName = RegionUtil.getRegionName(location);
-        if (plugin.getRegenMap().containsKey(regionName)) {
-            ReRegion regenRegion = plugin.getRegenMap().get(regionName);
-            String material = MaterialUtil.getRandomBlockData(regenRegion.getReplaceBlock());
-            int time = regenRegion.getTick();
-            if (BlockCompat.to(block).equalsIgnoreCase(regenRegion.getDefaultBlock())) return;
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                if (!BlockCompat.place(location, regenRegion.getDefaultBlock()))
-                    plugin.console("<red>블럭 데이터 오류: " + regenRegion.getDefaultBlock() + "</red>");
-                plugin.getTaskMap().put(location, new ReSchedule(material, time));
-                plugin.addLocation(location, material);
-            }, 1);
+        for (ReRegion region : getPlugin().getRegenMap().values()) {
+            if (region.region().equals(regionName)) {
+                String blockName = BlockCompat.to(block);
+                for (ReMaterial reMaterial : region.replaceBlock()) {
+                    if (reMaterial.material().equalsIgnoreCase(blockName)) {
+                        String material = MaterialUtil.getRandomBlockData(region.replaceBlock());
+                        int time = region.delay();
+                        if (region.defaultBlock().equalsIgnoreCase(blockName)) return;
+                        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+                            if (!BlockCompat.place(location, region.defaultBlock()))
+                                getPlugin().console("<red>블럭 데이터 오류: " + region.defaultBlock() + "</red>");
+                            getPlugin().getTaskMap().put(location, new ReSchedule(material, time));
+                            getPlugin().addLocation(location, material);
+                        }, 1);
+                        return;
+                    }
+                }
+                if (region.protect()) e.setCancelled(true);
+            }
         }
     }
 }

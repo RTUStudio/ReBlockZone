@@ -1,0 +1,20 @@
+# WorldGuard region
+# 월드가드 지역
+region: "test"
+# Regeneration delay (delay)
+# 재생성 대기 시간 (delay)
+delay: 50
+# Default block
+# 기본 블럭
+default: "minecraft:bedrock"
+# Block:Weight
+# 블럭:가중치
+replace:
+  - "minecraft:stone:10"
+  - "minecraft:sand:10"
+  - "minecraft:moss_block:10"
+  - "minecraft:grass_block:10"
+  - "minecraft:mud:10"
+# Protect non-replacement blocks
+# 교체 대상이 아닌 블럭을 보호합니다
+protect: true

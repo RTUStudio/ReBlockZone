@@ -2,7 +2,8 @@ package com.github.ipecter.rtustudio.rebz;
 
 import com.github.ipecter.rtustudio.rebz.commands.Command;
 import com.github.ipecter.rtustudio.rebz.configuration.RegionConfig;
-import com.github.ipecter.rtustudio.rebz.listeners.*;
+import com.github.ipecter.rtustudio.rebz.listeners.BlockBreak;
+import com.github.ipecter.rtustudio.rebz.listeners.PluginItemLoaded;
 import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import com.google.gson.JsonObject;
@@ -39,12 +40,9 @@ public class ReBlockZone extends RSPlugin {
         regenTask = Bukkit.getScheduler().runTaskTimer(this, new RegenRunnable(), 0, 1);
 
         registerEvent(new BlockBreak(this));
-        registerCommand(new Command(this));
+        registerEvent(new PluginItemLoaded(this));
 
-        if (getFramework().isEnabledDependency("ItemsAdder")) registerEvent(new ItemsAdderLoad(this));
-        else if (getFramework().isEnabledDependency("Oraxen")) registerEvent(new OraxenLoad(this));
-        else if (getFramework().isEnabledDependency("Nexo")) registerEvent(new NexoLoad(this));
-        else registerEvent(new VanillaLoad(this));
+        registerCommand(new Command(this));
     }
 
     public void initConfig() {
