@@ -42,7 +42,7 @@ public class ReBlockZone extends RSPlugin {
         registerEvent(new BlockBreak(this));
         registerEvent(new PluginItemLoaded(this));
 
-        registerCommand(new Command(this));
+        registerCommand(new Command(this), true);
     }
 
     public void initConfig() {

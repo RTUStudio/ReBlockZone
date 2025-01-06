@@ -7,7 +7,7 @@ import kr.rtuserver.framework.bukkit.api.command.RSCommandData;
 public class Command extends RSCommand<ReBlockZone> {
 
     public Command(ReBlockZone plugin) {
-        super(plugin, "rebz", true);
+        super(plugin, "rebz");
     }
 
     @Override
