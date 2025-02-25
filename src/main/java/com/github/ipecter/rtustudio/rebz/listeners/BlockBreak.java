@@ -7,7 +7,7 @@ import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import com.github.ipecter.rtustudio.rebz.util.MaterialUtil;
 import com.github.ipecter.rtustudio.rebz.util.RegionUtil;
 import kr.rtuserver.framework.bukkit.api.listener.RSListener;
-import kr.rtuserver.framework.bukkit.api.utility.compatible.BlockCompat;
+import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -29,14 +29,14 @@ public class BlockBreak extends RSListener<ReBlockZone> {
         String regionName = RegionUtil.getRegionName(location);
         for (ReRegion region : getPlugin().getRegenMap().values()) {
             if (region.region().equals(regionName)) {
-                String blockName = BlockCompat.to(block);
+                String blockName = CustomBlocks.to(block);
                 for (ReMaterial reMaterial : region.replaceBlock()) {
                     if (reMaterial.material().equalsIgnoreCase(blockName)) {
                         String material = MaterialUtil.getRandomBlockData(region.replaceBlock());
                         int time = region.delay();
                         if (region.defaultBlock().equalsIgnoreCase(blockName)) return;
                         Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
-                            if (!BlockCompat.place(location, region.defaultBlock()))
+                            if (!CustomBlocks.place(location, region.defaultBlock()))
                                 getPlugin().console("<red>블럭 데이터 오류: " + region.defaultBlock() + "</red>");
                             getPlugin().getTaskMap().put(location, new ReSchedule(material, time));
                             getPlugin().addLocation(location, material);

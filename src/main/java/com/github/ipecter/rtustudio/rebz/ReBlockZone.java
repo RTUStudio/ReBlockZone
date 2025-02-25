@@ -8,7 +8,7 @@ import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import com.google.gson.JsonObject;
 import kr.rtuserver.framework.bukkit.api.RSPlugin;
-import kr.rtuserver.framework.bukkit.api.utility.compatible.BlockCompat;
+import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import lombok.Getter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
@@ -71,7 +71,7 @@ public class ReBlockZone extends RSPlugin {
                 String[] loc = object.get("location").getAsString().split(",");
                 String materialStr = object.get("material").getAsString();
                 Location location = new Location(Bukkit.getWorld(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2]), Integer.parseInt(loc[3]));
-                BlockData material = BlockCompat.from(materialStr);
+                BlockData material = CustomBlocks.from(materialStr);
                 if (material == null) material = Material.AIR.createBlockData();
                 location.getWorld().setBlockData(location, material);
                 removeLocation(location);

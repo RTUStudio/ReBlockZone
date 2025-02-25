@@ -1,7 +1,7 @@
 package com.github.ipecter.rtustudio.rebz;
 
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
-import kr.rtuserver.framework.bukkit.api.utility.compatible.BlockCompat;
+import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -22,7 +22,7 @@ public class RegenRunnable implements Runnable {
             if (schedule.getTime() <= 0) {
                 World world = location.getWorld();
                 if (world != null) {
-                    BlockCompat.place(location, schedule.getMaterial());
+                    CustomBlocks.place(location, schedule.getMaterial());
                     toRemove.add(location);
                 }
             } else schedule.setTime(schedule.getTime() - 1);
