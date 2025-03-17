@@ -46,9 +46,11 @@ public class RegionConfig {
         }
 
         private void init() {
-            String region = getString("region", "");
+            List<String> region = getStringList("regions", List.of());
             if (region.isEmpty()) return;
-            int delay = getInt("delay", 50);
+            boolean global = getBoolean("delay.global", false);
+            int minDelay = getInt("delay.min", 5);
+            int maxDelay = getInt("delay.max", 50);
             String defaultBlock = getString("default", "minecraft:bedrock");
             List<ReMaterial> defaultReplace = new ArrayList<>();
             for (String replace : getStringList("replace", List.of())) {
@@ -61,7 +63,7 @@ public class RegionConfig {
                 } else getPlugin().console("<red>" + materialStr + " 타입은 잘못된 블럭 타입입니다");
             }
             boolean protect = getBoolean("protect", true);
-            plugin.getRegenMap().put(name, new ReRegion(name, region, delay, defaultBlock, defaultReplace, protect));
+            plugin.getRegenMap().put(name, new ReRegion(name, region, global, minDelay, maxDelay, defaultBlock, defaultReplace, protect));
         }
     }
 }

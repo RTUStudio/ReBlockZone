@@ -28,23 +28,25 @@ public class BlockBreak extends RSListener<ReBlockZone> {
         Location location = block.getLocation();
         String regionName = RegionUtil.getRegionName(location);
         for (ReRegion region : getPlugin().getRegenMap().values()) {
-            if (region.region().equals(regionName)) {
-                String blockName = CustomBlocks.to(block);
-                for (ReMaterial reMaterial : region.replaceBlock()) {
-                    if (reMaterial.material().equalsIgnoreCase(blockName)) {
-                        String material = MaterialUtil.getRandomBlockData(region.replaceBlock());
-                        int time = region.delay();
-                        if (region.defaultBlock().equalsIgnoreCase(blockName)) return;
-                        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
-                            if (!CustomBlocks.place(location, region.defaultBlock()))
-                                getPlugin().console("<red>블럭 데이터 오류: " + region.defaultBlock() + "</red>");
-                            getPlugin().getTaskMap().put(location, new ReSchedule(material, time));
-                            getPlugin().addLocation(location, material);
-                        }, 1);
-                        return;
+            for (String v : region.regions()) {
+                if (v.equals(regionName)) {
+                    String blockName = CustomBlocks.to(block);
+                    for (ReMaterial reMaterial : region.replaceBlock()) {
+                        if (reMaterial.material().equalsIgnoreCase(blockName)) {
+                            String material = MaterialUtil.getRandomBlockData(region.replaceBlock());
+                            int time = region.delay();
+                            if (region.defaultBlock().equalsIgnoreCase(blockName)) return;
+                            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+                                if (!CustomBlocks.place(location, region.defaultBlock()))
+                                    getPlugin().console("<red>블럭 데이터 오류: " + region.defaultBlock() + "</red>");
+                                getPlugin().getTaskMap().put(location, new ReSchedule(region, material, time));
+                                getPlugin().addLocation(location, material);
+                            }, 1);
+                            return;
+                        }
                     }
+                    if (region.protect()) e.setCancelled(true);
                 }
-                if (region.protect()) e.setCancelled(true);
             }
         }
     }

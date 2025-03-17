@@ -1,9 +1,15 @@
-# WorldGuard region
+# WorldGuard regions
 # 월드가드 지역
-region: "test"
-# Regeneration delay (delay)
-# 재생성 대기 시간 (delay)
-delay: 50
+regions:
+  - "test"
+# Regeneration delay (tick)
+# 재생성 대기 시간 (tick)
+delay:
+  # Region global delay, not block delay
+  # 블럭 지연이 아닌 지역 전체 지연
+  global: false
+  min: 25
+  max: 50
 # Default block
 # 기본 블럭
 default: "minecraft:bedrock"

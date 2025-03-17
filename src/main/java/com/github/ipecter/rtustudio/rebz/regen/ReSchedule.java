@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReSchedule {
 
+    private final ReRegion region;
     private final String material;
     private int time;
 

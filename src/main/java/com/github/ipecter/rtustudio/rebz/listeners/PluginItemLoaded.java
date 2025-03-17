@@ -12,7 +12,7 @@ public class PluginItemLoaded extends RSListener<ReBlockZone> {
     }
 
     @EventHandler
-    public void onItemsAdderLoad(CustomRegistryLoadedEvent e) {
+    public void onCustomRegistryLoaded(CustomRegistryLoadedEvent e) {
         getPlugin().initConfig();
         getPlugin().fixSchedule();
     }
