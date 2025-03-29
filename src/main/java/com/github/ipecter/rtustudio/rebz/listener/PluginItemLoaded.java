@@ -1,4 +1,4 @@
-package com.github.ipecter.rtustudio.rebz.listeners;
+package com.github.ipecter.rtustudio.rebz.listener;
 
 import com.github.ipecter.rtustudio.rebz.ReBlockZone;
 import kr.rtuserver.framework.bukkit.api.events.CustomRegistryLoadedEvent;

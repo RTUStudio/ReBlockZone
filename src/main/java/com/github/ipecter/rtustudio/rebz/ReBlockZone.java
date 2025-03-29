@@ -1,9 +1,9 @@
 package com.github.ipecter.rtustudio.rebz;
 
-import com.github.ipecter.rtustudio.rebz.commands.Command;
+import com.github.ipecter.rtustudio.rebz.command.MainCommand;
 import com.github.ipecter.rtustudio.rebz.configuration.RegionConfig;
-import com.github.ipecter.rtustudio.rebz.listeners.BlockBreak;
-import com.github.ipecter.rtustudio.rebz.listeners.PluginItemLoaded;
+import com.github.ipecter.rtustudio.rebz.listener.BlockBreak;
+import com.github.ipecter.rtustudio.rebz.listener.PluginItemLoaded;
 import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import com.google.gson.JsonObject;
@@ -42,7 +42,7 @@ public class ReBlockZone extends RSPlugin {
         registerEvent(new BlockBreak(this));
         registerEvent(new PluginItemLoaded(this));
 
-        registerCommand(new Command(this), true);
+        registerCommand(new MainCommand(this), true);
     }
 
     public void initConfig() {
