@@ -4,7 +4,7 @@ import com.github.ipecter.rtustudio.rebz.ReBlockZone;
 import com.github.ipecter.rtustudio.rebz.regen.ReMaterial;
 import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.google.common.io.Files;
-import kr.rtuserver.framework.bukkit.api.config.RSConfiguration;
+import kr.rtuserver.framework.bukkit.api.configuration.RSConfiguration;
 import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import kr.rtuserver.framework.bukkit.api.utility.platform.FileResource;
 
@@ -66,4 +66,5 @@ public class RegionConfig {
             plugin.getRegenMap().put(name, new ReRegion(name, region, global, minDelay, maxDelay, defaultBlock, defaultReplace, protect));
         }
     }
+
 }

@@ -37,4 +37,5 @@ public class RegionUtil {
         ProtectedRegion region = getRegion(location);
         return region == null ? "" : region.getId();
     }
+
 }

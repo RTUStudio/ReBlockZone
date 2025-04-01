@@ -9,4 +9,5 @@ public record ReRegion(String name, List<String> regions, boolean global, int mi
     public int delay() {
         return (int) (Math.random() * (maxDelay - minDelay + 1)) + minDelay;
     }
+
 }

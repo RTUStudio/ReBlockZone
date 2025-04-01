@@ -15,13 +15,13 @@ public class MainCommand extends RSCommand<ReBlockZone> {
 
     @Override
     protected void reload(RSCommandData data) {
-        plugin.getTaskMap().entrySet().removeIf(entry -> {
+        getPlugin().getTaskMap().entrySet().removeIf(entry -> {
             Location location = entry.getKey();
             ReSchedule schedule = entry.getValue();
             if (location.getWorld() != null) CustomBlocks.place(location, schedule.getMaterial());
             return true;
         });
-        plugin.initConfig();
+        getPlugin().initConfig();
     }
 
 }
