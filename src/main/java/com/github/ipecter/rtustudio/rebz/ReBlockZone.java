@@ -36,7 +36,7 @@ public class ReBlockZone extends RSPlugin {
     @Override
     public void enable() {
         instance = this;
-        getConfigurations().initStorage("Regen");
+        getConfigurations().getStorage().init("Regen");
         regenTask = Bukkit.getScheduler().runTaskTimer(this, new RegenRunnable(), 0, 1);
 
         registerEvent(new BlockBreak(this));

@@ -5,8 +5,8 @@ import com.github.ipecter.rtustudio.rebz.regen.ReMaterial;
 import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.google.common.io.Files;
 import kr.rtuserver.framework.bukkit.api.configuration.RSConfiguration;
+import kr.rtuserver.framework.bukkit.api.platform.FileResource;
 import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
-import kr.rtuserver.framework.bukkit.api.utility.platform.FileResource;
 
 import java.io.File;
 import java.util.ArrayList;
