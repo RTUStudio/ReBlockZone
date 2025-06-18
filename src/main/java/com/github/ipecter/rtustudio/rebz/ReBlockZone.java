@@ -8,6 +8,7 @@ import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import com.google.gson.JsonObject;
 import kr.rtuserver.framework.bukkit.api.RSPlugin;
+import kr.rtuserver.framework.bukkit.api.platform.JSON;
 import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import lombok.Getter;
 import org.apache.commons.lang3.tuple.Pair;
@@ -61,11 +62,11 @@ public class ReBlockZone extends RSPlugin {
 
     public void removeLocation(Location loc) {
         String location = loc.getWorld().getName() + "," + loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ();
-        getStorage().set("Regen", Pair.of("location", location), null).join();
+        getStorage().set("Regen", JSON.of("location", location), null).join();
     }
 
     public void fixSchedule() {
-        getStorage().get("Regen", null).thenAccept((result) -> {
+        getStorage().get("Regen", JSON.of()).thenAccept((result) -> {
             if (!result.isEmpty()) console("백업을 시도합니다");
             for (JsonObject object : result) {
                 String[] loc = object.get("location").getAsString().split(",");
