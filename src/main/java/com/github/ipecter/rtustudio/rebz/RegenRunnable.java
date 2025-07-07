@@ -1,6 +1,5 @@
 package com.github.ipecter.rtustudio.rebz;
 
-import com.github.ipecter.rtustudio.rebz.regen.ReRegion;
 import com.github.ipecter.rtustudio.rebz.regen.ReSchedule;
 import kr.rtuserver.framework.bukkit.api.registry.CustomBlocks;
 import lombok.RequiredArgsConstructor;
